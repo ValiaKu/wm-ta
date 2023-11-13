@@ -124,9 +124,6 @@ const App: React.FC = () => {
         <section className='panel'>
           <header>
             <h2>Basket</h2>
-            {/* TODO: implement delete one item from list <div className='control-panel'>
-              <button className='button'>Delete</button>
-            </div> */}
           </header>
 
           <ul className='items-list'>
