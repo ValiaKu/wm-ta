@@ -2,7 +2,7 @@ import { useState } from "react";
 
 interface NewInventoryItemProps {
   item: { title: string; id: number };
-  onAddNewInventory: (item: { title: string }) => void;
+  onAddNewInventory: (item: { id: number; title: string }) => void;
 }
 
 const NewInventoryItem: React.FC<NewInventoryItemProps> = ({
