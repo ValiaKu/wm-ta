@@ -1,7 +1,5 @@
-// components/Basket.tsx
 import React from "react";
 import BasketItem from "./BasketItem";
-import ItemList from "./ItemList";
 
 interface BasketProps {
   items: { id: number; title: string; quantity: number }[];
@@ -15,8 +13,15 @@ const Basket: React.FC<BasketProps> = ({ items, onDeleteFromBasket }) => {
         <h2>Basket</h2>
         {/* TODO: Implement delete one item from list */}
       </header>
-
-      <ItemList items={items} onDeleteFromBasket={onDeleteFromBasket} />
+      <ul className='items-list'>
+        {items.map((item) => (
+          <BasketItem
+            key={item.id}
+            item={item}
+            onDeleteFromBasket={onDeleteFromBasket}
+          />
+        ))}
+      </ul>
       <p className='basket-total-amount'>
         Total:{" "}
         <span>{items.reduce((total, item) => total + item.quantity, 0)}</span>
