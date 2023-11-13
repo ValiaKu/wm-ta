@@ -7,12 +7,12 @@ import NewInventoryItem from "./components/NewInventoryItem.tsx";
 import "./App.css";
 
 // TODO: implement initialization useState from LocalStorage
-const getInitialData = () => {
-  const data = JSON.parse(localStorage.getItem("inventoryItems"));
-  if (!data) return [];
+// const getInitialData = () => {
+//   const data = JSON.parse(localStorage.getItem("inventoryItems"));
+//   if (!data) return [];
 
-  return data;
-};
+//   return data;
+// };
 
 const App: React.FC = () => {
   interface ApiResponse {
@@ -32,7 +32,7 @@ const App: React.FC = () => {
 
   const [inventoryItems, setInventoryItems] = useState<InventoryItem[]>([]);
   const [basketItems, setBasketItems] = useState<BasketItem[]>([]);
-  const [selectedItem, setSelectedItem] = useState();
+  const [selectedItem, setSelectedItem] = useState({ id: 23, title: "test" });
   const [isAddNewItemOpen, setIsAddNewItemOpen] = useState(false);
 
   const INVENTORY_ITEMS_URL = "https://dummyjson.com/products?skip=5&limit=3";
