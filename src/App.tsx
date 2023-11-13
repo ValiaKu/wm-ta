@@ -55,11 +55,9 @@ const App: React.FC = () => {
 
   const handleSelectItem = (item: { id: number; title: string }) => {
     setSelectedItem({ id: item.id, title: item.title });
-    console.log(item);
   };
 
   const handleAddToBasket = (item: { id: number; title: string }) => {
-    console.log(selectedItem);
     const itemIndex = basketItems.findIndex(
       (basketItem) => basketItem.title === item.title
     );

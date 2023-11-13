@@ -10,7 +10,6 @@ const NewInventoryItem: React.FC<NewInventoryItemProps> = ({
 }) => {
   const [text, setText] = useState("");
   const handleChange = (evt) => {
-    console.log(evt.target.value);
     setText(evt.target.value);
   };
 
