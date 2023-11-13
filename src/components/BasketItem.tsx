@@ -1,4 +1,3 @@
-// src/components/BasketItem.tsx
 import React from "react";
 
 interface BasketItemProps {
