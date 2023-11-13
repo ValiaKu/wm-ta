@@ -1,8 +1,9 @@
+// src/components/BasketItem.tsx
 import React from "react";
 
 interface BasketItemProps {
-  item: { id: string; title: string; quantity: number };
-  onDeleteFromBasket: (item: { id: string; title: string }) => void;
+  item: { id: number; title: string; quantity: number };
+  onDeleteFromBasket: (item: { id: number; title: string }) => void;
 }
 
 const BasketItem: React.FC<BasketItemProps> = ({
@@ -10,12 +11,19 @@ const BasketItem: React.FC<BasketItemProps> = ({
   onDeleteFromBasket,
 }) => {
   return (
-    <div>
-      <span>
-        {item.title} - Quantity: {item.quantity}
-      </span>
-      <button onClick={() => onDeleteFromBasket(item)}>Delete</button>
-    </div>
+    <li>
+      <span>{item.title}</span>
+      <div className='item-control-wrapper'>
+        <span className='badge'>
+          Count: <span>{item.quantity}</span>
+        </span>
+        <button
+          className='button-icon blue'
+          onClick={() => onDeleteFromBasket(item)}>
+          ❌
+        </button>
+      </div>
+    </li>
   );
 };
 

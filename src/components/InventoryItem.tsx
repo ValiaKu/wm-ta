@@ -1,8 +1,6 @@
-import React from "react";
-
 interface InventoryItemProps {
-  item: { id: string; title: string };
-  onAddToBasket: (item: { id: string; title: string }) => void;
+  item: { id: number; title: string };
+  onAddToBasket: (item: { id: number; title: string }) => void;
 }
 
 const InventoryItem: React.FC<InventoryItemProps> = ({
@@ -10,10 +8,12 @@ const InventoryItem: React.FC<InventoryItemProps> = ({
   onAddToBasket,
 }) => {
   return (
-    <div>
+    <li>
       <span>{item.title}</span>
-      <button onClick={() => onAddToBasket(item)}>Add</button>
-    </div>
+      <button onClick={() => onAddToBasket(item)} className='button-icon'>
+        ➕
+      </button>
+    </li>
   );
 };
 
