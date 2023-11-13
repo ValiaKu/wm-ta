@@ -10,7 +10,7 @@ import "./App.css";
 const getInitialData = () => {
   const data = JSON.parse(localStorage.getItem("inventoryItems"));
   if (!data) return [];
-  console.log("data", data);
+
   return data;
 };
 
@@ -32,6 +32,8 @@ const App: React.FC = () => {
 
   const [inventoryItems, setInventoryItems] = useState<InventoryItem[]>([]);
   const [basketItems, setBasketItems] = useState<BasketItem[]>([]);
+  const [selectedItem, setSelectedItem] = useState();
+  const [isAddNewItemOpen, setIsAddNewItemOpen] = useState(false);
 
   const INVENTORY_ITEMS_URL = "https://dummyjson.com/products?skip=5&limit=3";
 
@@ -48,11 +50,16 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log("data2", localStorage.inventoryItems);
     localStorage.setItem("inventoryItems", JSON.stringify(inventoryItems));
   }, [inventoryItems]);
 
+  const handleSelectItem = (item: { id: number; title: string }) => {
+    setSelectedItem({ id: item.id, title: item.title });
+    console.log(item);
+  };
+
   const handleAddToBasket = (item: { id: number; title: string }) => {
+    console.log(selectedItem);
     const itemIndex = basketItems.findIndex(
       (basketItem) => basketItem.title === item.title
     );
@@ -73,6 +80,10 @@ const App: React.FC = () => {
     setBasketItems(updatedBasket);
   };
 
+  const handleOpenNewInventory = (statusForm: boolean) => {
+    setIsAddNewItemOpen(statusForm);
+  };
+
   const handleAddNewInventory = (item: { id: number; title: string }) => {
     setInventoryItems([...inventoryItems, { ...item, title: item.title }]);
   };
@@ -83,10 +94,19 @@ const App: React.FC = () => {
         <section className='panel'>
           <header>
             <h2>Inventory</h2>
-            {/* TODO: implement Add/New one item from list  <div className='control-panel'>
-              <button className='button'>New</button>
-              <button className='button'>Add</button>
-            </div> */}
+            TODO: implement Add/New one item from list{" "}
+            <div className='control-panel'>
+              <button
+                className='button'
+                onClick={() => handleOpenNewInventory(!isAddNewItemOpen)}>
+                New
+              </button>
+              <button
+                className='button'
+                onClick={() => handleAddToBasket(selectedItem)}>
+                Add to basket
+              </button>
+            </div>
           </header>
 
           <ul className='items-list'>
@@ -95,10 +115,12 @@ const App: React.FC = () => {
                 <InventoryItem
                   item={item}
                   key={item.id}
-                  onAddToBasket={handleAddToBasket}
+                  onSelectItem={handleSelectItem}
                 />
               ))}
-            <NewInventoryItem onAddNewInventory={handleAddNewInventory} />
+            {isAddNewItemOpen && (
+              <NewInventoryItem onAddNewInventory={handleAddNewInventory} />
+            )}
           </ul>
         </section>
         <section className='panel'>
